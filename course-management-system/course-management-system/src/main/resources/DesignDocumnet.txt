@@ -1,0 +1,59 @@
+================================================== Design Document Course Management System ==================================================
+- Create Course
+- Retrieve a single Course by id
+- Retrieve list of all Course
+- Update Course by id
+- Delete Course by id
+- Create  Chapter for course
+- Update Chapter
+- Retrieve Chapter by course id
+- Delete Chapter
+- Retrive Chapter by Chapter  id
+
+ Noun
+-Chapter
+-Course
+
+
+* Database Design
+
+Course
+- ID(PK) INT
+- TITLE varchar(255) NOT NULL
+- PRICE decimal(10,2) NOT NULL
+- ACTIVE_STATUS : VARCHAR(20) NOT NULL
+- CREATED_DATE_TIME : DATETIME NOT NULL
+- UPDATED_DATE_TIME : DATETIME NOT NULL
+
+Lecture
+- ID(PK) INT
+- TOPIC varchar(255) NOT NULL
+- Content TEXT NOT NULL
+- ACTIVE_STATUS : VARCHAR(20) NOT NULL
+- CREATED_DATE_TIME : DATETIME NOT NULL
+- UPDATED_DATE_TIME : DATETIME NOT NULL
+- COURSE_ID(FK) INT NOT NULL
+
+Relation mapping
+one course can have many Chapter
+one lecture  can have Course
+
+ENTITY
+
+CourseEntity
+-id Integer
+-title String
+-price BigDecimal
+-status StatusEnum
+-createdOn LocalDateTime
+-updatedOn LocalDateTime
+
+lectureEntity
+-id Integer
+-topic String
+-content String
+-status StatusEnum
+-courseEntity CourseEntity (many to one)
+-createdOn LocalDateTime
+-updatedOn LocalDateTime
+
