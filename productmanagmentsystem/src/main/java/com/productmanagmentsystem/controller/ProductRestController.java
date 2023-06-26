@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
@@ -23,7 +25,7 @@ public class ProductRestController {
     private final ProductServiceImp productServiceImp;
 
     @PostMapping("/products")
-    public ApiResponse saveProduct(@RequestBody CreateProductRequest createProductRequest) {
+    public ApiResponse saveProduct(@RequestBody @Valid CreateProductRequest createProductRequest) {
         log.debug("<<<<<<<<< saveProduct() ");
         ProductResponse productResponse = this.productServiceImp.saveProduct(createProductRequest);
         log.info("Product create sucessfully with id {}", productResponse.getProductId());
@@ -33,7 +35,7 @@ public class ProductRestController {
     }
 
     @GetMapping("products/{id}")
-    public ApiResponse getProductById(@PathVariable("id") Integer productId) {
+    public ApiResponse getProductById(@Positive(message = "ProductId should not be null or zero") @PathVariable("id") Integer productId) {
         log.debug("<<<<<<<<< getProductById() ");
         ProductResponse productResponse = this.productServiceImp.fetchProductById(productId);
         log.debug("getProductById() >>>>>>>>");
@@ -56,7 +58,7 @@ public class ProductRestController {
     }
 
     @PutMapping("products/{id}")
-    public ApiResponse updateProduct(@PathVariable Integer id, @RequestBody UpdateProductRequest updateProductRequest) {
+    public ApiResponse updateProduct(@PathVariable Integer id,@Valid @RequestBody UpdateProductRequest updateProductRequest) {
         log.debug("<<<<<<<<< updateProduct() ");
         ProductResponse productResponse = this.productServiceImp.updateProduct(id, updateProductRequest);
         log.debug("updateProduct()>>>>>>>> ");

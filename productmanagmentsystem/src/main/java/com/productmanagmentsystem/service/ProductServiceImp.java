@@ -52,7 +52,7 @@ public class ProductServiceImp implements ProductService {
         log.debug("<<<<<<<<< fetchProductById");
         ProductEntity productEntity = getProductEntityById(productId);
         log.debug("fetchProductById() >>>>>>>");
-        System.out.println("productEntity ::::::::::::::::::::::::= " + productEntity.toString());
+        //System.out.println("productEntity ::::::::::::::::::::::::= " + productEntity.toString());
         return this.productMapper.toDto(productEntity);
     }
 
@@ -73,6 +73,7 @@ public class ProductServiceImp implements ProductService {
         dbProductData.setName(updateProductRequest.getProductName());
         dbProductData.setPrice(updateProductRequest.getProductPrice());
         dbProductData.setDescription(updateProductRequest.getProductDescription());
+        dbProductData.setStatus(updateProductRequest.getStaus());
         ProductEntity updatedproductEntity = this.productRepository.save(dbProductData);
         log.debug("updateProduct() >>>>>>>");
         return this.productMapper.toDto(updatedproductEntity);
@@ -81,6 +82,9 @@ public class ProductServiceImp implements ProductService {
     @Override
     public List<ProductResponse> getPagedProductList() {
         List<ProductEntity> allProductList = productRepository.findAll();
+        if(allProductList.isEmpty()){
+            throw new ProductNotFoundException("No Product Available");
+        }
         List<ProductResponse> collect = allProductList.stream()
                 .map(productEntity -> new ProductResponse(null, productEntity.getName(), productEntity.getDescription(), productEntity.getPrice(), productEntity.getStatus(), productEntity.getCreatedDateTime(), productEntity.getUpdatedDateTime())).collect(Collectors.toList());
         collect.forEach(System.out::println);

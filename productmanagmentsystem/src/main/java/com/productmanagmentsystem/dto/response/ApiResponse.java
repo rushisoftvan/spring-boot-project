@@ -20,16 +20,18 @@ public class ApiResponse {
 
     private List<String> errors;
 
+    private String url;
+
+
+
     public ApiResponse(Object data, Integer statusCode){
         this.data=data;
         this.statusCode=statusCode;
     }
 
-    public ApiResponse(List<String> errors,Integer statusCode){
+    public ApiResponse(List<String> errors,Integer statusCode,String url){
         this.statusCode=statusCode;
         this.errors=errors;
+        this.url=url;
     }
-
-
-
 }
