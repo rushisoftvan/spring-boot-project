@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@Validated
 @Slf4j
 public class ProductRestController {
 
@@ -35,7 +37,7 @@ public class ProductRestController {
     }
 
     @GetMapping("products/{id}")
-    public ApiResponse getProductById(@Positive(message = "ProductId should not be null or zero") @PathVariable("id") Integer productId) {
+    public ApiResponse getProductById(@PathVariable("id") @Positive(message ="ProductId should not be null or zero")  Integer productId) {
         log.debug("<<<<<<<<< getProductById() ");
         ProductResponse productResponse = this.productServiceImp.fetchProductById(productId);
         log.debug("getProductById() >>>>>>>>");
