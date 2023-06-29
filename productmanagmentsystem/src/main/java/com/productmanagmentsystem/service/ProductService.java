@@ -15,7 +15,7 @@ public interface ProductService {
 
     public ProductResponse  fetchProductById(Integer productId);
 
-    public void  deleteProduct(Integer productId);
+    public String  deleteProduct(Integer productId);
 
     public ProductResponse updateProduct(Integer id,UpdateProductRequest updateProductRequest);
 

@@ -5,16 +5,15 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.Arrays;
-import  java.util.List;
+import java.util.List;
 
-import static java.util.Arrays.*;
+import static java.util.Arrays.asList;
 
 @Slf4j
 public  class StatusValidater implements ConstraintValidator<ValidateStatus,StatusEnum> {
 
     public boolean isValid(StatusEnum  status, ConstraintValidatorContext constraintValidatorContext) {
-        List<StatusEnum> statusType = asList(StatusEnum.ACTIVE,StatusEnum.IN_ACTIVE);
-        return statusType.contains(status);
+        List<String> statusType = asList(StatusEnum.ACTIVE.name(),StatusEnum.IN_ACTIVE.name());
+        return statusType.contains(status.name());
     }
 }

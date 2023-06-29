@@ -37,7 +37,7 @@ public class ProductRestController {
     }
 
     @GetMapping("products/{id}")
-    public ApiResponse getProductById(@PathVariable("id") @Positive(message ="ProductId should not be null or zero")  Integer productId) {
+    public ApiResponse getProductById(@PathVariable("id") @Positive(message ="ProductId should  be greater then zero")  Integer productId) {
         log.debug("<<<<<<<<< getProductById() ");
         ProductResponse productResponse = this.productServiceImp.fetchProductById(productId);
         log.debug("getProductById() >>>>>>>>");
@@ -54,9 +54,9 @@ public class ProductRestController {
     @DeleteMapping("/products/{id}")
     public ApiResponse deleteProductById(@PathVariable("id") Integer productId) {
         log.debug("<<<<<<<<< deleteProductById() ");
-        this.productServiceImp.deleteProduct(productId);
+        String deleteddMessage = this.productServiceImp.deleteProduct(productId);
         log.debug("deleteProductById()>>>>>>>> ");
-        return new ApiResponse(true, HttpStatus.OK.value());
+        return new ApiResponse(deleteddMessage, HttpStatus.OK.value());
     }
 
     @PutMapping("products/{id}")

@@ -1,9 +1,7 @@
 package com.productmanagmentsystem.service;
 
 import com.productmanagmentsystem.dto.request.CreateProductRequest;
-import com.productmanagmentsystem.dto.request.ProductPageRequest;
 import com.productmanagmentsystem.dto.request.UpdateProductRequest;
-import com.productmanagmentsystem.dto.response.ProductPagedResponse;
 import com.productmanagmentsystem.dto.response.ProductResponse;
 import com.productmanagmentsystem.entity.ProductEntity;
 import com.productmanagmentsystem.enums.StatusEnum;
@@ -12,16 +10,8 @@ import com.productmanagmentsystem.mapper.ProductMapper;
 import com.productmanagmentsystem.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,17 +47,22 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public void deleteProduct(Integer productId) {
+    public String deleteProduct(Integer productId) {
         log.debug("<<<<<<<<< deleteProduct()");
         log.debug("deleteProduct() >>>>>>>");
         ProductEntity product = getProductEntityById(productId);
         product.setStatus(StatusEnum.IN_ACTIVE);
         productRepository.save(product);
         log.debug("deleteProduct() >>>>>>>");
+        return "data is deleted for id : "+ productId;
     }
 
     @Override
     public ProductResponse updateProduct(Integer id, UpdateProductRequest updateProductRequest) {
+        if(updateProductRequest==null){
+            throw new NullPointerException("updateProductList should not be null");
+
+        }
         log.debug("<<<<<<<<< updateProduct()");
         ProductEntity dbProductData = getProductEntityById(id);
         dbProductData.setName(updateProductRequest.getProductName());
@@ -99,6 +94,7 @@ public class ProductServiceImp implements ProductService {
             log.debug("getProductEntityById() >>>>>>>");
             return product.get();
         } else {
+            //
             // throw new ProductNotFoundException(String.format("product does not exists with id : %s", productId));
             throw new ProductNotFoundException(String.format("product does not exists with id : %s", productId));
         }
@@ -110,6 +106,4 @@ public class ProductServiceImp implements ProductService {
             throw new NullPointerException("product object should not be null");
         }
     }
-
-
 }

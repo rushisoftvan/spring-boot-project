@@ -22,6 +22,7 @@ public class UpdateProductRequest {
     @NotNull(message = "Product Price should not be null")
     private Integer productPrice;
 
+    @NotNull(message = "status should not be null")
     @ValidateStatus
     private StatusEnum staus;
 
