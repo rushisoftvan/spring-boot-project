@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Slf4j
@@ -42,7 +43,7 @@ public class BookRestController {
     }
 
     @DeleteMapping
-    public ApiResponse<String> deleteBookById(@PathVariable("id") @Positive(message = "id should be greter then zero") Integer id){
+    public ApiResponse<String> deleteBookById(@PathVariable("id") @Positive(message = "id should be greter then zero") @NotNull(message = "id should not be null") Integer id){
         log.debug("<<<<<<<<< controller deleteBookById()");
         String deleteMessage = this.bookServiceImp.deleteBookById(id);
         log.debug("controller-deleteBookById() >>>>>>>");
@@ -64,8 +65,4 @@ public class BookRestController {
         log.debug("BookPagedList() >>>>>>>");
         return  new ApiResponse(bookPagedListResponse,HttpStatus.OK.value());
     }
-
-
-
-
 }
