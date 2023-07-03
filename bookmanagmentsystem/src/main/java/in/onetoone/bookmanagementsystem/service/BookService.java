@@ -1,7 +1,9 @@
 package in.onetoone.bookmanagementsystem.service;
 
+import in.onetoone.bookmanagementsystem.dto.request.BooksPagedRequest;
 import in.onetoone.bookmanagementsystem.dto.request.CreateBookRequest;
 import in.onetoone.bookmanagementsystem.dto.request.UpdateBookRequest;
+import in.onetoone.bookmanagementsystem.dto.response.BookPagedListResponse;
 import in.onetoone.bookmanagementsystem.dto.response.BookResponse;
 
 public interface BookService {
@@ -13,6 +15,7 @@ public interface BookService {
     public String deleteBookById(Integer id);
 
    public BookResponse updateBook(Integer id,UpdateBookRequest updateBookRequest);
+   public BookPagedListResponse fetchAllBookDetails(BooksPagedRequest booksPagedRequest);
 
 
 }

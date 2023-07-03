@@ -7,6 +7,9 @@ import in.onetoone.bookmanagementsystem.entity.BookEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @Slf4j
 public class BookMapper {
@@ -41,5 +44,15 @@ public class BookMapper {
          bookResponse.setBookUpdatedDateTime(bookEntity.getUpdatedDateTime());
          bookResponse.setStatus(bookEntity.getStatus());
          return bookResponse;
+     }
+
+     public List<BookResponse> toDtoList(List<BookEntity> bookEntities){
+       List<BookResponse> dtoList = new ArrayList();
+       for(BookEntity book : bookEntities)
+       {
+           BookResponse bookResponse = toDto(book);
+           dtoList.add(bookResponse);
+       }
+       return dtoList;
      }
 }

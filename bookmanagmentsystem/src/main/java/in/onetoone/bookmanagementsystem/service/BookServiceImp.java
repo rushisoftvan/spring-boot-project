@@ -1,8 +1,10 @@
 package in.onetoone.bookmanagementsystem.service;
 
 import in.onetoone.bookmanagementsystem.Exception.RecordNotFountException;
+import in.onetoone.bookmanagementsystem.dto.request.BooksPagedRequest;
 import in.onetoone.bookmanagementsystem.dto.request.CreateBookRequest;
 import in.onetoone.bookmanagementsystem.dto.request.UpdateBookRequest;
+import in.onetoone.bookmanagementsystem.dto.response.BookPagedListResponse;
 import in.onetoone.bookmanagementsystem.dto.response.BookResponse;
 import in.onetoone.bookmanagementsystem.entity.BookEntity;
 import in.onetoone.bookmanagementsystem.enums.StatusEnum;
@@ -10,8 +12,13 @@ import in.onetoone.bookmanagementsystem.mapper.BookMapper;
 import in.onetoone.bookmanagementsystem.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -57,10 +64,12 @@ public class BookServiceImp implements BookService {
         return  this.bookMapper.toDto(updatedBook);
     }
 
+    @Transactional
     private BookEntity updateBook(UpdateBookRequest updateBookRequest, BookEntity bookEntity) {
         bookEntity.setTitle(updateBookRequest.getBookTitle());
         bookEntity.setPublishedYear(updateBookRequest.getPublishedYear());
         bookEntity.setStatus(updateBookRequest.getStatus());
+
         bookEntity.getAuthor().setFirstName(updateBookRequest.getAuthorFirstName());
         bookEntity.getAuthor().setLastName(updateBookRequest.getAuthorLastName());
         bookEntity.getAuthor().setAuthorExperience(updateBookRequest.getAuthorExperience());
@@ -82,4 +91,35 @@ public class BookServiceImp implements BookService {
             throw new NullPointerException("BookRequest object should not be null");
         }
     }
+
+
+    public BookPagedListResponse fetchAllBookDetails(BooksPagedRequest booksPagedRequest) {
+        log.debug("<<<<<<<<< fetchAllBookDetails()");
+        Integer pageNumber = booksPagedRequest.getPageNo()-1;
+        Integer pageSize = booksPagedRequest.getPageSize();
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<BookEntity> bookspage  = this.bookRepository.findAll(pageable);
+        if(bookspage.isEmpty()){
+          throw new RecordNotFountException("Book are not available");
+        }
+        List<BookEntity> listOfBookEntity = bookspage.getContent();
+        log.debug("fetchAllBookDetails() >>>>>>>");
+        return  getBookPagedListResponse(bookspage, listOfBookEntity);
+
+    }
+
+    private BookPagedListResponse getBookPagedListResponse(Page<BookEntity> bookspage, List<BookEntity> listOfBookEntity) {
+        log.debug("<<<<<<<<< getBookPagedListResponse()");
+        List<BookResponse> dtoList = this.bookMapper.toDtoList(listOfBookEntity);
+        BookPagedListResponse bookPagedListResponse = new BookPagedListResponse();
+        bookPagedListResponse.setListOfBooks(dtoList);
+        bookPagedListResponse.setFirstPage(bookspage.isFirst());
+        bookPagedListResponse.setLastPage(bookspage.isLast());
+        bookPagedListResponse.setHasNext(bookspage.hasNext());
+        bookPagedListResponse.setHasPrevious(bookspage.hasPrevious());
+        bookPagedListResponse.setTotalRecords(bookPagedListResponse.getTotalRecords());
+        log.debug("getBookPagedListResponse() >>>>>>>");
+        return bookPagedListResponse;
+    }
+
 }

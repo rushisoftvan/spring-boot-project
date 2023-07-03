@@ -1,8 +1,10 @@
 package in.onetoone.bookmanagementsystem.controller;
 
+import in.onetoone.bookmanagementsystem.dto.request.BooksPagedRequest;
 import in.onetoone.bookmanagementsystem.dto.request.CreateBookRequest;
 import in.onetoone.bookmanagementsystem.dto.request.UpdateBookRequest;
 import in.onetoone.bookmanagementsystem.dto.response.ApiResponse;
+import in.onetoone.bookmanagementsystem.dto.response.BookPagedListResponse;
 import in.onetoone.bookmanagementsystem.dto.response.BookResponse;
 import in.onetoone.bookmanagementsystem.service.BookServiceImp;
 import lombok.RequiredArgsConstructor;
@@ -48,11 +50,19 @@ public class BookRestController {
     }
 
     @PutMapping("books/{id}")
-    public ApiResponse updateBook(@PathVariable("id") Integer id, UpdateBookRequest updateBookRequest){
+    public ApiResponse updateBook(@PathVariable("id") Integer id, @RequestBody UpdateBookRequest updateBookRequest){
         log.debug("<<<<<<<<< controllerupdateBook()");
         BookResponse bookResponse = this.bookServiceImp.updateBook(id, updateBookRequest);
-        log.debug("controllerupdateBook >>>>>>>");
+        log.debug("controllerupdateBook() >>>>>>>");
        return new ApiResponse(bookResponse,HttpStatus.CREATED.value());
+    }
+
+    @PostMapping("/bookList")
+    public ApiResponse BookPagedList(@RequestBody BooksPagedRequest booksPagedRequest){
+        log.debug("<<<<<<<<< BookPagedList()");
+        BookPagedListResponse bookPagedListResponse = this.bookServiceImp.fetchAllBookDetails(booksPagedRequest);
+        log.debug("BookPagedList() >>>>>>>");
+        return  new ApiResponse(bookPagedListResponse,HttpStatus.OK.value());
     }
 
 
