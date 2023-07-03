@@ -7,7 +7,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestControllerAdvice
@@ -28,6 +30,18 @@ public class GlobalExceptionHandler {
             finalErrors.add(error.getDefaultMessage());
         }
         return new ApiResponse(finalErrors,HttpStatus.BAD_REQUEST.value());
+    }
+
+    @ExceptionHandler(value= ConstraintViolationException.class)
+    public ApiResponse handleConstraintViolationException(ConstraintViolationException ex){
+        String errorMessage = ex.getMessage();
+        return  new ApiResponse(Arrays.asList(errorMessage),HttpStatus.BAD_REQUEST.value());
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    public ApiResponse<Object> handleNullPointerException(NullPointerException ex){
+        String errorMessage = ex.getMessage();
+       return new ApiResponse(Arrays.asList(errorMessage),HttpStatus.BAD_REQUEST.value());
     }
 
 }

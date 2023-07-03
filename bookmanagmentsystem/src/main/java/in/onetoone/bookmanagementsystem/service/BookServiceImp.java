@@ -42,23 +42,35 @@ public class BookServiceImp implements BookService {
 
     @Override
     public BookResponse fetchBookById(Integer id) {
+        checkBookIdNull(id);
+
         log.debug("<<<<<<<<< fetchBookById()");
-        BookEntity bookEntity = getBookEntity(id);
+        BookEntity bookEntity = getBookEntityById(id);
         log.debug("fetchBookById() >>>>>>>");
         return this.bookMapper.toDto(bookEntity);
     }
+
+    private static void checkBookIdNull(Integer id) {
+        if(id==null){
+            throw new NullPointerException("book Id should not be null");
+        }
+    }
+
     public String deleteBookById(Integer id) {
+         checkBookIdNull(id);
         log.debug("<<<<<<<<< deleteBookById()");
-        BookEntity bookEntity = getBookEntity(id);
+        BookEntity bookEntity = getBookEntityById(id);
         bookEntity.setStatus(StatusEnum.IN_ACTIVE);
+        this.bookRepository.save(bookEntity);
         log.debug("deleteBookById() >>>>>>>");
         return "Book has been deleted for id :"+id ;
     }
 
     @Override
     public BookResponse updateBook(Integer id,UpdateBookRequest updateBookRequest) {
+         checkBookIdNull(id);
          log.debug("<<<<<<<<< updateBook()");
-        BookEntity bookEntity = getBookEntity(id);
+        BookEntity bookEntity = getBookEntityById(id);
         BookEntity updatedBook = updateBook(updateBookRequest, bookEntity);
         log.debug("updateBook >>>>>>>");
         return  this.bookMapper.toDto(updatedBook);
@@ -66,6 +78,7 @@ public class BookServiceImp implements BookService {
 
     @Transactional
     private BookEntity updateBook(UpdateBookRequest updateBookRequest, BookEntity bookEntity) {
+
         bookEntity.setTitle(updateBookRequest.getBookTitle());
         bookEntity.setPublishedYear(updateBookRequest.getPublishedYear());
         bookEntity.setStatus(updateBookRequest.getStatus());
@@ -77,7 +90,7 @@ public class BookServiceImp implements BookService {
         return updatedBook;
     }
 
-    private BookEntity getBookEntity(Integer id) {
+    private BookEntity getBookEntityById(Integer id) {
          log.debug("<<<<<<<<< getBookEntity()");
         Optional<BookEntity> book = this.bookRepository.findById(id);
         if(book.isPresent()){
@@ -99,7 +112,7 @@ public class BookServiceImp implements BookService {
         Integer pageSize = booksPagedRequest.getPageSize();
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<BookEntity> bookspage  = this.bookRepository.findAll(pageable);
-        if(bookspage.isEmpty()){
+        if(bookspage.getContent().isEmpty()){
           throw new RecordNotFountException("Book are not available");
         }
         List<BookEntity> listOfBookEntity = bookspage.getContent();
@@ -121,5 +134,7 @@ public class BookServiceImp implements BookService {
         log.debug("getBookPagedListResponse() >>>>>>>");
         return bookPagedListResponse;
     }
+
+
 
 }

@@ -35,25 +35,25 @@ public class BookRestController {
 
     @GetMapping("books/{id}")
     public ApiResponse<BookResponse> fetchBookById(@PathVariable("id") @Positive(message = "id should be greter then zero") Integer id){
-        log.debug("<<<<<<<<< controllerfetchBookById()");
+        log.debug("<<<<<<<<< controller-fetchBookById()");
         BookResponse bookResponse = this.bookServiceImp.fetchBookById(id);
-        log.debug("controllerfetchBookById() >>>>>>>");
+        log.debug("controller-fetchBookById() >>>>>>>");
         return new ApiResponse(bookResponse,HttpStatus.OK.value());
     }
 
     @DeleteMapping
     public ApiResponse<String> deleteBookById(@PathVariable("id") @Positive(message = "id should be greter then zero") Integer id){
-        log.debug("<<<<<<<<< controllerdeleteBookById()");
+        log.debug("<<<<<<<<< controller deleteBookById()");
         String deleteMessage = this.bookServiceImp.deleteBookById(id);
-        log.debug("controllerdeleteBookById() >>>>>>>");
+        log.debug("controller-deleteBookById() >>>>>>>");
         return new ApiResponse<>(deleteMessage,HttpStatus.OK.value());
     }
 
     @PutMapping("books/{id}")
     public ApiResponse updateBook(@PathVariable("id") Integer id, @RequestBody UpdateBookRequest updateBookRequest){
-        log.debug("<<<<<<<<< controllerupdateBook()");
+        log.debug("<<<<<<<<< controller-updateBook()");
         BookResponse bookResponse = this.bookServiceImp.updateBook(id, updateBookRequest);
-        log.debug("controllerupdateBook() >>>>>>>");
+        log.debug("controller-updateBook() >>>>>>>");
        return new ApiResponse(bookResponse,HttpStatus.CREATED.value());
     }
 
@@ -64,6 +64,8 @@ public class BookRestController {
         log.debug("BookPagedList() >>>>>>>");
         return  new ApiResponse(bookPagedListResponse,HttpStatus.OK.value());
     }
+
+
 
 
 }
