@@ -20,10 +20,10 @@ public class CreateBookRequest {
      @NotNull(message="publishedYear should not be null")
     private Integer publishedYear;
 
-     @NotEmpty(message="Authore First Name should not be null or empaty")
+     @NotEmpty(message="Authore First Name should not be null or empty")
     private String authorFirstName;
 
-    @NotEmpty(message="Authore Last Name should not be null or empaty")
+    @NotEmpty(message="Authore Last Name should not be null or empty")
     private String authorLastName;
 
     @NotNull(message="authorExperience should not be null")
