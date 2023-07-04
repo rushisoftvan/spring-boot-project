@@ -112,9 +112,7 @@ public class BookServiceImp implements BookService {
         Integer pageSize = booksPagedRequest.getPageSize();
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<BookEntity> bookspage  = this.bookRepository.findAll(pageable);
-        if(bookspage.getContent().isEmpty()){
-          throw new RecordNotFountException("Book are not available");
-        }
+
         List<BookEntity> listOfBookEntity = bookspage.getContent();
         log.debug("fetchAllBookDetails() >>>>>>>");
         return  getBookPagedListResponse(bookspage, listOfBookEntity);

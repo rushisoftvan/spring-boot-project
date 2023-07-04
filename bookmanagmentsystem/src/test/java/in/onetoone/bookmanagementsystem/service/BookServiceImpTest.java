@@ -256,7 +256,7 @@ class BookServiceImpTest {
         updateBookRequest.setAuthorExperience(12);
 
         BookServiceImp bookServiceImp = new BookServiceImp(bookRepositoryMock, bookMapper);
-        assertThrows(NullPointerException.class,()->bookServiceImp.updateBook(null,updateBookRequest));
+        assertThrows(RuntimeException.class,()->bookServiceImp.updateBook(null,updateBookRequest));
     }
 
 

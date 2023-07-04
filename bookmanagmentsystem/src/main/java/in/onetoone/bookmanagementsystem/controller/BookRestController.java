@@ -55,7 +55,7 @@ public class BookRestController {
         log.debug("<<<<<<<<< controller-updateBook()");
         BookResponse bookResponse = this.bookServiceImp.updateBook(id, updateBookRequest);
         log.debug("controller-updateBook() >>>>>>>");
-       return new ApiResponse(bookResponse,HttpStatus.CREATED.value());
+       return new ApiResponse(bookResponse,HttpStatus.OK.value());
     }
 
     @PostMapping("/bookList")

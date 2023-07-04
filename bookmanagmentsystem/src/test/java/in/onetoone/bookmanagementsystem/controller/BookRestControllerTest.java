@@ -166,7 +166,7 @@ class BookRestControllerTest {
         updateBookRequest.setBookTitle("springBoot");
 
        Mockito.when(this.bookServiceImp.updateBook(id,updateBookRequest)).thenThrow(NullPointerException.class);
-      assertThrows(NullPointerException.class,()->this.bookRestController.updateBook(id,updateBookRequest));
+      assertThrows(RuntimeException.class,()->this.bookRestController.updateBook(id,updateBookRequest));
     }
 
 

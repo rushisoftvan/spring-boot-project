@@ -38,10 +38,16 @@ public class GlobalExceptionHandler {
         return  new ApiResponse(Arrays.asList(errorMessage),HttpStatus.BAD_REQUEST.value());
     }
 
-    @ExceptionHandler(NullPointerException.class)
-    public ApiResponse<Object> handleNullPointerException(NullPointerException ex){
-        String errorMessage = ex.getMessage();
-       return new ApiResponse(Arrays.asList(errorMessage),HttpStatus.BAD_REQUEST.value());
+//    @ExceptionHandler(NullPointerException.class)
+//    public ApiResponse<Object> handleNullPointerException(NullPointerException ex){
+//        String errorMessage = ex.getMessage();
+//       return new ApiResponse(Arrays.asList(errorMessage),HttpStatus.BAD_REQUEST.value());
+//    }
+
+    @ExceptionHandler(value=RuntimeException.class)
+     public void handleRunTimeException(RuntimeException ex){
+         String  messages = "somthing is wrong from server side";
+        new ApiResponse<>(Arrays.asList(messages),HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 
 }
