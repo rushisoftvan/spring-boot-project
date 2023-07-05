@@ -149,7 +149,7 @@ class EmployeeRestControllerTest {
         employeePageListResponse.setEmployeeResponseList(employess);
         Mockito.when(this.employeeService.getAllEmployee(employeePagedListRequest)).thenReturn(employeePageListResponse);
         ApiResponse<EmployeePageListResponse> allEmployee = this.EmployeeRestController.getAllEmployee(employeePagedListRequest);
-         assertEquals(200,allEmployee.getStatusCode());
+        assertEquals(200,allEmployee.getStatusCode());
          assertEquals(employeePageListResponse,allEmployee.getData());
     }
 }

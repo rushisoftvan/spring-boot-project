@@ -14,10 +14,10 @@ import java.util.List;
 @ToString
 public class CreateEmployeeRequest {
 
-    @NotEmpty(message= "EmoloyeeName should not be null or empty")
+    @NotEmpty(message= "Emoloyee Name should not be null or empty")
     private String employeeName;
 
-    @NotNull(message="EmoloyeeName should not be null")
+    @NotNull(message="Emoloyee Age should not be null")
     private Integer employeeAge;
 
     private List<CreateAddressRequest> addresses = new ArrayList<>();
