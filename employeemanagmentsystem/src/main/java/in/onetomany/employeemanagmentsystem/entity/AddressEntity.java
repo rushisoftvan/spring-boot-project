@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @DynamicUpdate
 @Table(name="address")
-@ToString
+
 public class AddressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,8 @@ public class AddressEntity {
     @Column(name = "HOUSE_NO")
     private Integer houseNo;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
+    @ToString.Exclude
     private EmployeeEntity employeeEntity;
 }

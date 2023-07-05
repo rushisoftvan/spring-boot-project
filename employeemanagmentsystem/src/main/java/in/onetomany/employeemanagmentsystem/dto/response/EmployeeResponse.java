@@ -4,12 +4,14 @@ import in.onetomany.employeemanagmentsystem.StatusEnum.StatusEnum;
 import in.onetomany.employeemanagmentsystem.dto.request.CreateAddressRequest;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
+@ToString
 public class EmployeeResponse {
     private Integer employeeId;
 
@@ -19,5 +21,5 @@ public class EmployeeResponse {
 
     private StatusEnum employeeStatus;
 
-    private List<CreateAddressRequest> addresses = new ArrayList<>();
+    private List<AddressResponse> addresses = new ArrayList<>();
 }
