@@ -38,7 +38,7 @@ public class EmployeeService {
         checkCreateEmployeeRequest(createEmployeeRequest);
         EmployeeEntity employeeEntity = this.employeeMapper.toEntity(createEmployeeRequest);
 
-        log.info("Converted employee entity : {}" , employeeEntity);
+        log.info("Converted employee entity : {}", employeeEntity);
 
         System.out.println("employeeEntity.getAddressEntityList() = " + employeeEntity.getAddressEntityList());
         System.out.println("employeeEntity.getName() = " + employeeEntity.getName());
@@ -48,54 +48,53 @@ public class EmployeeService {
     }
 
     private static void checkCreateEmployeeRequest(CreateEmployeeRequest createEmployeeRequest) {
-        if(createEmployeeRequest ==null)
-        {
+        if (createEmployeeRequest == null) {
             throw new CustomException("CreateEmployeeRequest should not be null");
         }
     }
 
     @Transactional(readOnly = true)
-    public EmployeeResponse getEmployeeById(Integer id)
-    {
+    public EmployeeResponse getEmployeeById(Integer id) {
         EmployeeEntity employeEntity = getEmployeEntity(id);
-        return  this.employeeMapper.toDto(employeEntity);
+        return this.employeeMapper.toDto(employeEntity);
     }
 
     private EmployeeEntity getEmployeEntity(Integer id) {
         Optional<EmployeeEntity> employee = this.employeeRepository.findById(id);
-        if(employee.isPresent()){
+        if (employee.isPresent()) {
             EmployeeEntity employeeEntity = employee.get();
             employeeEntity.getAddressEntityList();
             return employeeEntity;
-        }
-        else{
-            throw new RecordNotFountException("Employee is not available :"+ id);
+        } else {
+            throw new RecordNotFountException("Employee is not available :" + id);
         }
     }
 
 
-    public void deleteEmployeeById(Integer id)
-    {
+    public void deleteEmployeeById(Integer id) {
         log.debug("<<<<<<<<< addEmployee()");
         EmployeeEntity employeEntity = this.getEmployeEntity(id);
         employeEntity.setStatus(StatusEnum.IN_ACTIVE);
         this.employeeRepository.save(employeEntity);
-
     }
 
 
-    public void updateEmployee(Integer id, UpdateEmployeeRequest employee){
+    public EmployeeResponse updateEmployee(Integer id, UpdateEmployeeRequest employee) {
         EmployeeEntity employeEntity = getEmployeEntity(id);
+        this.employeeMapper.copy(employee,employeEntity);
+        EmployeeEntity updatedEmployee = this.employeeRepository.save(employeEntity);
+        EmployeeResponse dto = this.employeeMapper.toDto(updatedEmployee);
+        return dto;
 
     }
 
 
     @Transactional(readOnly = true)
-    public EmployeePageListResponse getAllEmployee(EmployeePagedListRequest employeePagedListRequest){
-        if(employeePagedListRequest==null){
-            throw new  CustomException("employeePagedListRequest should not be null");
+    public EmployeePageListResponse getAllEmployee(EmployeePagedListRequest employeePagedListRequest) {
+        if (employeePagedListRequest == null) {
+            throw new CustomException("employeePagedListRequest should not be null");
         }
-        Integer pageNo = employeePagedListRequest.getPageNo()-1;
+        Integer pageNo = employeePagedListRequest.getPageNo() - 1;
         Integer pageSize = employeePagedListRequest.getPageSize();
         Pageable page = PageRequest.of(pageNo, pageSize);
         Page<EmployeeEntity> employePage = this.employeeRepository.findAll(page);
@@ -105,5 +104,4 @@ public class EmployeeService {
         employeePageListResponse.setTotalRecords(employePage.getTotalElements());
         return employeePageListResponse;
     }
-
 }

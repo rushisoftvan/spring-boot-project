@@ -2,6 +2,7 @@ package in.onetomany.employeemanagmentsystem.mapper;
 
 import in.onetomany.employeemanagmentsystem.dto.request.CreateAddressRequest;
 import in.onetomany.employeemanagmentsystem.dto.request.CreateEmployeeRequest;
+import in.onetomany.employeemanagmentsystem.dto.request.UpdateEmployeeRequest;
 import in.onetomany.employeemanagmentsystem.dto.response.EmployeePageListResponse;
 import in.onetomany.employeemanagmentsystem.dto.response.EmployeeResponse;
 import in.onetomany.employeemanagmentsystem.entity.EmployeeEntity;
@@ -27,5 +28,9 @@ public interface EmployeeMapper {
     public EmployeeResponse toDto(EmployeeEntity employe);
 
     List<EmployeeResponse> toListOfEmployeeResponse(List<EmployeeEntity> employeeEntities);
+
+    @Mapping(source = "employeeName",target = "name")
+    @Mapping(source = "updateAddressRequestList",target = "addressEntities")
+    void copy(UpdateEmployeeRequest source, @MappingTarget EmployeeEntity target);
 
 }

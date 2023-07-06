@@ -2,6 +2,7 @@ package in.onetomany.employeemanagmentsystem.controller;
 
 import in.onetomany.employeemanagmentsystem.dto.request.CreateEmployeeRequest;
 import in.onetomany.employeemanagmentsystem.dto.request.EmployeePagedListRequest;
+import in.onetomany.employeemanagmentsystem.dto.request.UpdateEmployeeRequest;
 import in.onetomany.employeemanagmentsystem.dto.response.ApiResponse;
 import in.onetomany.employeemanagmentsystem.dto.response.EmployeePageListResponse;
 import in.onetomany.employeemanagmentsystem.dto.response.EmployeeResponse;
@@ -63,6 +64,12 @@ public class EmployeeRestController {
         return  builder.data(allEmployee).statusCode(HttpStatus.OK.value()).build();
     }
 
-
-
+    @PutMapping("/employees/{id}")
+    public ApiResponse<EmployeeResponse> updateEmployee(@PathVariable Integer id, @Valid @RequestBody UpdateEmployeeRequest updateEmployeeRequest){
+        log.debug("<<<<<<<<< updateEmployee()");
+        EmployeeResponse employeeResponse = this.employeeService.updateEmployee(id, updateEmployeeRequest);
+        log.debug("getAllEmployee() >>>>>>>");
+        ApiResponse.ApiResponseBuilder<EmployeeResponse> builder = ApiResponse.builder();
+        return  builder.data(employeeResponse).statusCode(HttpStatus.OK.value()).build();
+    }
 }
