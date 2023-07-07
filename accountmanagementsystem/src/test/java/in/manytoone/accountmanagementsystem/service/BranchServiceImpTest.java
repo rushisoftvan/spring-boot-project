@@ -79,7 +79,7 @@ class BranchServiceImpTest {
         BranchServiceImp branchServiceImp = new BranchServiceImp(branchMock, branchMapper);
 
         BranchResponse branchResponse = new BranchResponse();
-        branchResponse.setAccountId(id);
+
         branchResponse.setBranchName("odhav");
         branchResponse.setStatus(Status.ACTIVE);
 
@@ -192,11 +192,9 @@ class BranchServiceImpTest {
 
         branches.add(branchEntity);
 
-
         BranchRepository branchMock = Mockito.mock(BranchRepository.class);
         BranchMapperImpl branchMapper = new BranchMapperImpl();
         BranchServiceImp branchServiceImp = new BranchServiceImp(branchMock, branchMapper);
-
 
         Integer pageNo=branchPageRequest.getPageNo()-1;
         Integer pageSize=branchPageRequest.getPageSize();

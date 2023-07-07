@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,10 +23,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(RecordNotFoundException.class)
-    public ApiResponse<Object> handleCustomException(RecordNotFoundException ex){
+    public ApiResponse<Object> handleRecordNotFoundException(RecordNotFoundException ex){
         String message = ex.getMessage();
         ApiResponse.ApiResponseBuilder builder = ApiResponse.builder();
-        return ApiResponse.builder().errors(Arrays.asList(message)).statusCode(HttpStatus.BAD_REQUEST.value()).build();
+        return builder.errors(Arrays.asList(message)).statusCode(HttpStatus.BAD_REQUEST.value()).build();
     }
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ApiResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException methodArgumentNotValidException) {
@@ -35,6 +36,13 @@ public class GlobalExceptionHandler {
             finalErrors.add(error.getDefaultMessage());
         }
         return ApiResponse.builder().data(finalErrors).statusCode(HttpStatus.BAD_REQUEST.value()).build();
+    }
+
+    @ExceptionHandler(value= ConstraintViolationException.class)
+    public ApiResponse<Object> handleConstraintViolationException(ConstraintViolationException ex){
+        String message = ex.getMessage();
+        return ApiResponse.builder().errors(Arrays.asList(message)).statusCode(HttpStatus.BAD_REQUEST.value()).build();
+
     }
 
 

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 public class BranchResponse {
 
-    private Integer accountId;
+     private Integer branchId;
     private String branchCode;
 
     private String branchName;

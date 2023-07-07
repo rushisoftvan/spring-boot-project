@@ -58,7 +58,7 @@ public class BranchController {
     }
 
     @PostMapping("/pagebranches")
-     public ApiResponse<BranchPagedResponse> getAllBranch(@RequestBody BranchPageRequest branchPageRequest)
+     public ApiResponse<BranchPagedResponse> getAllBranch(@Valid @RequestBody BranchPageRequest branchPageRequest)
      {      log.debug("<<<<<<<<< getAllBranch()");
          BranchPagedResponse allBranch = this.branchService.getAllBranch(branchPageRequest);
          ApiResponse.ApiResponseBuilder<BranchPagedResponse> builder = ApiResponse.builder();
