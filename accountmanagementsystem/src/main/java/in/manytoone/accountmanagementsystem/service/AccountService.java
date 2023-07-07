@@ -1,6 +1,7 @@
 package in.manytoone.accountmanagementsystem.service;
 
 import in.manytoone.accountmanagementsystem.dto.request.CreateAccountRequest;
+import in.manytoone.accountmanagementsystem.dto.request.UpdateAccountRequest;
 import in.manytoone.accountmanagementsystem.dto.response.AccountResponse;
 
 public interface AccountService {
@@ -10,6 +11,7 @@ public interface AccountService {
 
     public void deleteAccountById(Integer id);
 
-    //public AccountResponse updateAccount();
+    public AccountResponse updateAccount(Integer id, UpdateAccountRequest updateAccountRequest);
+
 
 }

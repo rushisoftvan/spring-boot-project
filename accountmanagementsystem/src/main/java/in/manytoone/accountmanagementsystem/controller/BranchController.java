@@ -42,6 +42,7 @@ public class BranchController {
     public ApiResponse<BranchResponse> fetchBranchById(@PathVariable("id") @Positive(message= "id should be greater than zero") @NotNull(message="id should not be null or empty") Integer id)
     {  log.debug("<<<<<<<<< fetchBranchById()");
         BranchResponse branchResponse = this.branchService.fetchBranchById(id);
+
         log.debug("fetchBranchById() >>>>>>>");
         ApiResponse.ApiResponseBuilder<BranchResponse> builder = ApiResponse.builder();
         return  builder.data(branchResponse).statusCode(HttpStatus.OK.value()).build();

@@ -3,6 +3,7 @@ package in.manytoone.accountmanagementsystem.service;
 import in.manytoone.accountmanagementsystem.Exception.RecordNotFoundException;
 import in.manytoone.accountmanagementsystem.Repository.AccountRepository;
 import in.manytoone.accountmanagementsystem.dto.request.CreateAccountRequest;
+import in.manytoone.accountmanagementsystem.dto.request.UpdateAccountRequest;
 import in.manytoone.accountmanagementsystem.dto.response.AccountResponse;
 import in.manytoone.accountmanagementsystem.entity.AccountEntity;
 import in.manytoone.accountmanagementsystem.entity.BranchEntity;
@@ -57,5 +58,16 @@ public class AccountServiceImp  implements AccountService{
         AccountEntity deletedAccount = this.accountRepository.save(deletedEntity);
     }
 
-
+    @Transactional
+    @Override
+    public AccountResponse updateAccount(Integer id, UpdateAccountRequest updateAccountRequest) {
+        AccountEntity accountEntity = getAccountEntity(id);
+        BranchEntity branchforupdate = this.branchService.getBranchById(updateAccountRequest.getBranchId());
+        accountEntity.setAccountNumber(updateAccountRequest.getAccountNumber());
+        accountEntity.setFullName(updateAccountRequest.getFullName());
+        accountEntity.setBalance(updateAccountRequest.getBalance());
+        accountEntity.setBranch(branchforupdate);
+        AccountEntity updatedAcoount = this.accountRepository.save(accountEntity);
+        return this.accountMapper.from(updatedAcoount, updatedAcoount.getBranch());
+    }
 }
