@@ -1,5 +1,6 @@
 package in.manytoone.accountmanagementsystem.service;
 
+import in.manytoone.accountmanagementsystem.Exception.CustomException;
 import in.manytoone.accountmanagementsystem.Exception.RecordNotFoundException;
 import in.manytoone.accountmanagementsystem.Repository.AccountRepository;
 import in.manytoone.accountmanagementsystem.dto.request.CreateAccountRequest;
@@ -26,6 +27,7 @@ public class AccountServiceImp  implements AccountService{
 
     @Override
     public AccountResponse creatAccount(CreateAccountRequest createAccountRequest) {
+        checkCreateAccountRequect(createAccountRequest);
         BranchEntity branch = this.branchService.getBranchById(createAccountRequest.getBranchId());
         AccountEntity accountEntity = this.accountMapper.toEntity(createAccountRequest);
         accountEntity.setBranch(branch);
@@ -34,11 +36,24 @@ public class AccountServiceImp  implements AccountService{
         return account;
     }
 
+    private static void checkCreateAccountRequect(CreateAccountRequest createAccountRequest) {
+        if(createAccountRequest ==null){
+            throw new CustomException("create account Request should not be null");
+        }
+    }
+
     @Override
     @Transactional(readOnly = true)
     public AccountResponse getAccountById(Integer id) {
+        checkAccountId(id);
         AccountEntity accountEntity = getAccountEntity(id);
          return this.accountMapper.from(accountEntity, accountEntity.getBranch());
+    }
+
+    private static void checkAccountId(Integer id) {
+        if(id ==null){
+          throw new CustomException("id should not be null");
+        }
     }
 
     private AccountEntity getAccountEntity(Integer id) {
@@ -51,16 +66,22 @@ public class AccountServiceImp  implements AccountService{
     }
 
     @Override
-    public void deleteAccountById(Integer id) {
+    public Boolean deleteAccountById(Integer id) {
+        checkAccountId(id);
         AccountEntity accountEntity = this.getAccountEntity(id);
         accountEntity.setStatus(Status.IN_ACTIVE);
         AccountEntity deletedEntity = this.accountRepository.save(accountEntity);
         AccountEntity deletedAccount = this.accountRepository.save(deletedEntity);
+        return true;
     }
 
     @Transactional
     @Override
     public AccountResponse updateAccount(Integer id, UpdateAccountRequest updateAccountRequest) {
+        if(updateAccountRequest==null)
+        {
+            throw new CustomException("id should not be null");
+        }
         AccountEntity accountEntity = getAccountEntity(id);
         BranchEntity branchforupdate = this.branchService.getBranchById(updateAccountRequest.getBranchId());
         accountEntity.setAccountNumber(updateAccountRequest.getAccountNumber());

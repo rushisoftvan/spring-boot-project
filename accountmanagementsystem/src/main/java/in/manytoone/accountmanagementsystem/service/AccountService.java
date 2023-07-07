@@ -9,7 +9,7 @@ public interface AccountService {
     public AccountResponse creatAccount(CreateAccountRequest createAccountRequest);
     public AccountResponse getAccountById(Integer id);
 
-    public void deleteAccountById(Integer id);
+    public Boolean deleteAccountById(Integer id);
 
     public AccountResponse updateAccount(Integer id, UpdateAccountRequest updateAccountRequest);
 
