@@ -42,15 +42,24 @@ public class BranchServiceImp implements  BranchService{
 
     @Override
     public BranchResponse fetchBranchById(Integer id) {
+
+        checkIdNull(id);
         log.debug("<<<<<<<<< fetchBranchById() {}",id);
         BranchEntity branchById = getBranchById(id);
         log.debug("<<<<<<<<< fetchBranchById() {}", id);
        return  this.branchMapper.toDto(branchById);
     }
 
+    private static void checkIdNull(Integer id) {
+        if(id ==null){
+             throw new CustomException("id should not be null");
+        }
+    }
+
     @Override
     public BranchResponse deleteById(Integer id) {
         log.debug("<<<<<<<<< deleteById()");
+        checkIdNull(id);
         BranchEntity dbBranch = getBranchById(id);
         dbBranch.setStatus(Status.IN_ACTIVE);
         BranchEntity updatedBranch = this.branchRepository.save(dbBranch);
@@ -70,6 +79,10 @@ public class BranchServiceImp implements  BranchService{
     
     @Override
     public BranchResponse updateBranch(Integer id, UpdateBranchRequest updateBranchRequest) {
+        checkIdNull(id);
+        if(updateBranchRequest==null){
+            throw new CustomException("update request should not be null");
+        }
         log.debug("<<<<<<<<< deleteById()");
         BranchEntity dbBranch = getBranchById(id);
         dbBranch.setName(updateBranchRequest.getBranchName());
