@@ -18,7 +18,7 @@ public interface StudentCourseRepository extends JpaRepository<StudentCourseEnti
             "from StudentCourseEntity sc" +
             " join sc.student s " +
             "join sc.course c " +
-            "where c.id= :courseId",nativeQuery = true)
+            "where c.id= :courseId")
     List<StudentCourseDto> findStudentstoEnrollInCourse(@Param("courseId") Integer courseId);
 
 
