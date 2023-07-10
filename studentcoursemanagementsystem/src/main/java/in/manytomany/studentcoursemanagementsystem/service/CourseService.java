@@ -18,13 +18,14 @@ import java.util.Optional;
 
 
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class CourseService {
 
-    @Autowired
-    private CourseRepository courseRepository;
-    @Autowired
-    private CourseMapper courseMapper;
+
+    private final CourseRepository courseRepository;
+
+
+    private final CourseMapper courseMapper;
 
 
     public CourseResponse saveCourse(CreateCourseRequest createCourseRequest) {
