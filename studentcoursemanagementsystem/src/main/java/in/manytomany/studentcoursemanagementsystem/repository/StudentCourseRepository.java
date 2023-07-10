@@ -10,15 +10,15 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+
 
 public interface StudentCourseRepository extends JpaRepository<StudentCourseEntity, Integer> {
-    @Query( "select " +
+    @Query( value = "select " +
             "new in.manytomany.studentcoursemanagementsystem.dto.StudentCourseDto(s.id,s.name,s.age,c.id,c.name,c.price,sc.enrolledDateTime) " +
-            "from StudentCourseEntity as sc" +
+            "from StudentCourseEntity sc" +
             " join sc.student s " +
             "join sc.course c " +
-            "where c.id= :courseId")
+            "where c.id= :courseId",nativeQuery = true)
     List<StudentCourseDto> findStudentstoEnrollInCourse(@Param("courseId") Integer courseId);
 
 
