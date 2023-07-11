@@ -1,25 +1,26 @@
-package in.manytomany.studentcoursemanagementsystem.dto;
+package com.mtm.scm.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@RequiredArgsConstructor
-@Getter
 
+@Getter
+@RequiredArgsConstructor
 public class StudentCourseDto {
 
-    private Integer studentId;
+    private final Integer studentId;
 
-    private String studentName;
+    private final String studentName;
 
-    private String studentAge;
-    private Integer courseId;
-    private String courseName;
-    private String coursePrice;
-    private LocalDateTime enrolDate;
+    private final Integer studentAge;
+    private final Integer courseId;
+    private final String courseName;
+    private final BigDecimal coursePrice;
+    private final LocalDateTime enrolDate;
+
 }
 
 

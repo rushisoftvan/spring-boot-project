@@ -1,4 +1,4 @@
-package in.manytomany.studentcoursemanagementsystem.entity;
+package com.mtm.scm.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

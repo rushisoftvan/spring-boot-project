@@ -1,6 +1,6 @@
-package in.manytomany.studentcoursemanagementsystem.entity;
+package com.mtm.scm.entity;
 
-import in.manytomany.studentcoursemanagementsystem.enums.Status;
+import com.mtm.scm.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

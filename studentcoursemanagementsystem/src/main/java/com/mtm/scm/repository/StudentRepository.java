@@ -1,6 +1,6 @@
-package in.manytomany.studentcoursemanagementsystem.repository;
+package com.mtm.scm.repository;
 
-import in.manytomany.studentcoursemanagementsystem.entity.StudentEntity;
+import com.mtm.scm.entity.StudentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

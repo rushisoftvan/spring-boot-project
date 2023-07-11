@@ -1,9 +1,9 @@
-package in.manytomany.studentcoursemanagementsystem.controller;
+package com.mtm.scm.controller;
 
-import in.manytomany.studentcoursemanagementsystem.dto.request.CreateStudentRequest;
-import in.manytomany.studentcoursemanagementsystem.dto.response.ApiResponse;
-import in.manytomany.studentcoursemanagementsystem.dto.response.StudentResponse;
-import in.manytomany.studentcoursemanagementsystem.service.StudentService;
+import com.mtm.scm.dto.response.ApiResponse;
+import com.mtm.scm.service.StudentService;
+import com.mtm.scm.dto.request.CreateStudentRequest;
+import com.mtm.scm.dto.response.StudentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;

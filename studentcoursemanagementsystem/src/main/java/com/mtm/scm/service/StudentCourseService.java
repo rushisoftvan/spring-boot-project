@@ -1,17 +1,16 @@
-package in.manytomany.studentcoursemanagementsystem.service;
+package com.mtm.scm.service;
 
-import in.manytomany.studentcoursemanagementsystem.dto.StudentCourseDto;
-import in.manytomany.studentcoursemanagementsystem.dto.request.BuyCourseRequest;
-import in.manytomany.studentcoursemanagementsystem.dto.response.StudentCourseResponse;
-import in.manytomany.studentcoursemanagementsystem.entity.CourseEntity;
-import in.manytomany.studentcoursemanagementsystem.entity.StudentCourseEntity;
-import in.manytomany.studentcoursemanagementsystem.entity.StudentEntity;
-import in.manytomany.studentcoursemanagementsystem.exception.CustomException;
-import in.manytomany.studentcoursemanagementsystem.mapper.StudentCourseMapper;
-import in.manytomany.studentcoursemanagementsystem.repository.StudentCourseRepository;
+import com.mtm.scm.repository.StudentCourseRepository;
+import com.mtm.scm.dto.StudentCourseDto;
+import com.mtm.scm.dto.request.BuyCourseRequest;
+import com.mtm.scm.dto.response.StudentCourseResponse;
+import com.mtm.scm.entity.CourseEntity;
+import com.mtm.scm.entity.StudentCourseEntity;
+import com.mtm.scm.entity.StudentEntity;
+import com.mtm.scm.exception.CustomException;
+import com.mtm.scm.mapper.StudentCourseMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,8 +49,7 @@ public class StudentCourseService {
     }
 
     public List<StudentCourseDto> fetchStudentstoEnrollInCourse(Integer id){
-        this.studentCourseRepository.findStudentstoEnrollInCourse(id);
-        return null;
+        return this.studentCourseRepository.findStudentstoEnrollInCourse(id);
     }
 
 }

@@ -1,14 +1,11 @@
-package in.manytomany.studentcoursemanagementsystem.service;
+package com.mtm.scm.service;
 
-import in.manytomany.studentcoursemanagementsystem.dto.request.CreateStudentRequest;
-import in.manytomany.studentcoursemanagementsystem.entity.StudentEntity;
-import in.manytomany.studentcoursemanagementsystem.enums.Status;
-import in.manytomany.studentcoursemanagementsystem.mapper.StudentMappper;
-import in.manytomany.studentcoursemanagementsystem.repository.StudentRepository;
+import com.mtm.scm.entity.StudentEntity;
+import com.mtm.scm.enums.Status;
+import com.mtm.scm.repository.StudentRepository;
+import com.mtm.scm.dto.request.CreateStudentRequest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class StudentServiceTest {
 

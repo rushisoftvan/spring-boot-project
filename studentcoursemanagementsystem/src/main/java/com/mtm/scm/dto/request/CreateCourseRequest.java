@@ -1,4 +1,4 @@
-package in.manytomany.studentcoursemanagementsystem.dto.request;
+package com.mtm.scm.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

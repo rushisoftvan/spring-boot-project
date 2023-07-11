@@ -1,4 +1,4 @@
-package in.manytomany.studentcoursemanagementsystem;
+package com.mtm.scm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

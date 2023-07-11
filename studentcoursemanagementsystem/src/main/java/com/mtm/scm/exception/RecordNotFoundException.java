@@ -1,4 +1,4 @@
-package in.manytomany.studentcoursemanagementsystem.exception;
+package com.mtm.scm.exception;
 
 public class RecordNotFoundException extends RuntimeException{
 

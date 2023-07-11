@@ -1,24 +1,22 @@
-package in.manytomany.studentcoursemanagementsystem.repository;
+package com.mtm.scm.repository;
 
-import in.manytomany.studentcoursemanagementsystem.dto.StudentCourseDto;
-import in.manytomany.studentcoursemanagementsystem.entity.StudentCourseEntity;
+import com.mtm.scm.dto.StudentCourseDto;
+import com.mtm.scm.entity.StudentCourseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 
 
 public interface StudentCourseRepository extends JpaRepository<StudentCourseEntity, Integer> {
-    @Query( value = "select " +
-            "new in.manytomany.studentcoursemanagementsystem.dto.StudentCourseDto(s.id,s.name,s.age,c.id,c.name,c.price,sc.enrolledDateTime) " +
-            "from StudentCourseEntity sc" +
-            " join sc.student s " +
-            "join sc.course c " +
-            "where c.id= :courseId")
+   @Query(value = "SELECT" +
+           " new com.mtm.scm.dto.StudentCourseDto(s.id,s.name,s.age,c.id,c.name,c.price,sc.enrolledDateTime)" +
+           " FROM StudentCourseEntity sc" +
+           " JOIN sc.student s" +
+           " JOIN sc.course c" +
+           " WHERE c.id = :courseId")
     List<StudentCourseDto> findStudentstoEnrollInCourse(@Param("courseId") Integer courseId);
 
 

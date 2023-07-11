@@ -1,6 +1,6 @@
-package in.manytomany.studentcoursemanagementsystem.dto.response;
+package com.mtm.scm.dto.response;
 
-import in.manytomany.studentcoursemanagementsystem.enums.Status;
+import com.mtm.scm.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
 

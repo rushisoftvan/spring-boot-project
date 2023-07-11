@@ -1,8 +1,8 @@
-package in.manytomany.studentcoursemanagementsystem.mapper;
+package com.mtm.scm.mapper;
 
-import in.manytomany.studentcoursemanagementsystem.dto.request.CreateStudentRequest;
-import in.manytomany.studentcoursemanagementsystem.dto.response.StudentResponse;
-import in.manytomany.studentcoursemanagementsystem.entity.StudentEntity;
+import com.mtm.scm.dto.response.StudentResponse;
+import com.mtm.scm.entity.StudentEntity;
+import com.mtm.scm.dto.request.CreateStudentRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 

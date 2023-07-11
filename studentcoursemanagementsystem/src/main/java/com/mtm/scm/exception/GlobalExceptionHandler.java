@@ -1,6 +1,6 @@
-package in.manytomany.studentcoursemanagementsystem.exception;
+package com.mtm.scm.exception;
 
-import in.manytomany.studentcoursemanagementsystem.dto.response.ApiResponse;
+import com.mtm.scm.dto.response.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;

@@ -1,12 +1,12 @@
-package in.manytomany.studentcoursemanagementsystem.service;
+package com.mtm.scm.service;
 
-import in.manytomany.studentcoursemanagementsystem.dto.request.CreateStudentRequest;
-import in.manytomany.studentcoursemanagementsystem.dto.response.StudentResponse;
-import in.manytomany.studentcoursemanagementsystem.entity.StudentEntity;
-import in.manytomany.studentcoursemanagementsystem.exception.CustomException;
-import in.manytomany.studentcoursemanagementsystem.exception.RecordNotFoundException;
-import in.manytomany.studentcoursemanagementsystem.mapper.StudentMappper;
-import in.manytomany.studentcoursemanagementsystem.repository.StudentRepository;
+import com.mtm.scm.dto.request.CreateStudentRequest;
+import com.mtm.scm.dto.response.StudentResponse;
+import com.mtm.scm.entity.StudentEntity;
+import com.mtm.scm.exception.CustomException;
+import com.mtm.scm.exception.RecordNotFoundException;
+import com.mtm.scm.mapper.StudentMappper;
+import com.mtm.scm.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

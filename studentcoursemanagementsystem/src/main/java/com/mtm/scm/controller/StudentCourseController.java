@@ -1,12 +1,11 @@
-package in.manytomany.studentcoursemanagementsystem.controller;
+package com.mtm.scm.controller;
 
-import in.manytomany.studentcoursemanagementsystem.dto.StudentCourseDto;
-import in.manytomany.studentcoursemanagementsystem.dto.request.BuyCourseRequest;
-import in.manytomany.studentcoursemanagementsystem.dto.response.ApiResponse;
-import in.manytomany.studentcoursemanagementsystem.dto.response.StudentCourseResponse;
-import in.manytomany.studentcoursemanagementsystem.service.StudentCourseService;
+import com.mtm.scm.dto.StudentCourseDto;
+import com.mtm.scm.dto.request.BuyCourseRequest;
+import com.mtm.scm.service.StudentCourseService;
+import com.mtm.scm.dto.response.ApiResponse;
+import com.mtm.scm.dto.response.StudentCourseResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +34,8 @@ public class StudentCourseController {
     }
 
          @GetMapping("/studentcourse/{id}")
-        public ApiResponse<List<StudentCourseDto>> getStudentstoEnrollInCourse(@PathVariable("id") @Positive(message= "id should be greater than zero") @NotNull(message = "course id should not be null") Integer courseId){
+        public ApiResponse<List<StudentCourseDto>> getStudentstoEnrollInCourse(@PathVariable("id")
+                @Positive(message= "id should be greater than zero") @NotNull(message = "course id should not be null") Integer courseId){
 
             List<StudentCourseDto> studentCourseResponses = this.studentCourseService.fetchStudentstoEnrollInCourse(courseId);
             ApiResponse.ApiResponseBuilder<List<StudentCourseDto>> builder = ApiResponse.builder();

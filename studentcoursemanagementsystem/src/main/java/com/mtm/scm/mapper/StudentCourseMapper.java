@@ -1,9 +1,8 @@
-package in.manytomany.studentcoursemanagementsystem.mapper;
+package com.mtm.scm.mapper;
 
-import in.manytomany.studentcoursemanagementsystem.dto.response.StudentCourseResponse;
-import in.manytomany.studentcoursemanagementsystem.entity.CourseEntity;
-import in.manytomany.studentcoursemanagementsystem.entity.StudentEntity;
-import org.mapstruct.Context;
+import com.mtm.scm.entity.CourseEntity;
+import com.mtm.scm.entity.StudentEntity;
+import com.mtm.scm.dto.response.StudentCourseResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -20,7 +19,7 @@ public interface StudentCourseMapper {
           @Mapping(source = "courseEntity.name",target="courseName")
           @Mapping(source = "courseEntity.price",target="coursePrice")
           @Mapping(source = "date",target="enrolDate")
-        StudentCourseResponse studentAndCoursetoStudentCourseResponse(StudentEntity studentEntity, CourseEntity courseEntity,  LocalDateTime date);
+        StudentCourseResponse studentAndCoursetoStudentCourseResponse(StudentEntity studentEntity, CourseEntity courseEntity, LocalDateTime date);
 
 
 }
