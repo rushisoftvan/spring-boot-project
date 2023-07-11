@@ -6,23 +6,18 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class UpdateCourseRequest {
+public class UpdateStudentRequest {
 
-    @NotEmpty(message = "name should not be null or empty")
+    @NotEmpty(message="name should not be null or empty")
     private String name;
 
-    @NotNull(message="price should not be null")
-    private BigDecimal price;
+    @NotNull(message="age should not be null")
+    private Integer age;
 
-    @NotNull(message="status should not null")
+    @NotNull(message="status should not be null")
     private Status status;
-
-
-
-
 
 }

@@ -40,7 +40,5 @@ public class StudentCourseController {
             List<StudentCourseDto> studentCourseResponses = this.studentCourseService.fetchStudentstoEnrollInCourse(courseId);
             ApiResponse.ApiResponseBuilder<List<StudentCourseDto>> builder = ApiResponse.builder();
             return  builder.Data(studentCourseResponses).statusCode(HttpStatus.OK.value()).build();
-
         }
-
 }

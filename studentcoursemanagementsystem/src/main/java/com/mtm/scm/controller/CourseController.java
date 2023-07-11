@@ -51,7 +51,8 @@ public class CourseController {
        PagedCourseResponse pagedCourseResponse = this.courseService.fetchCourseBasedOnPage(coursePageRequest);
        ApiResponse.ApiResponseBuilder<PagedCourseResponse> builder = ApiResponse.builder();
        return builder.Data(pagedCourseResponse).statusCode(HttpStatus.OK.value()).build();
-
    }
+
+
 
 }
