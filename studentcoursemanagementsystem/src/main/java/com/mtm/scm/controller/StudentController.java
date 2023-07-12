@@ -54,8 +54,10 @@ public class StudentController {
 
     @PostMapping("/pageStudents")
     public ApiResponse<PagedStudentResponse> getStudentList(@Valid @RequestBody PageStudentListRequest pageStudentListRequest){
+        log.debug("<<<<<<<<< getStudentList()");
         PagedStudentResponse pagedStudentResponse = this.studentService.pageStudentList(pageStudentListRequest);
         ApiResponse.ApiResponseBuilder<PagedStudentResponse> builder = ApiResponse.builder();
+        log.debug("getStudentList() >>>>>>>");
         return  builder.Data(pagedStudentResponse).statusCode(HttpStatus.OK.value()).build();
     }
 }

@@ -41,4 +41,11 @@ public class StudentCourseController {
             ApiResponse.ApiResponseBuilder<List<StudentCourseDto>> builder = ApiResponse.builder();
             return  builder.Data(studentCourseResponses).statusCode(HttpStatus.OK.value()).build();
         }
+
+
+        @GetMapping("/sc")
+        public String getStudentWhoHasNoCourse(){
+               this.studentCourseService.getStudentWhoHasNoCourse();
+               return "ok";
+        }
 }

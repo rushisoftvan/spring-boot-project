@@ -20,12 +20,12 @@ public interface StudentCourseRepository extends JpaRepository<StudentCourseEnti
            " WHERE c.id = :courseId")
     List<StudentCourseDto> findStudentstoEnrollInCourse(@Param("courseId") Integer courseId);
 
-   /**
-   @Query("select s.id,s.name,s.age from StudentCourseEntity sc" +
+
+   @Query(value = "select s.id,s.name,s.age from StudentCourseEntity sc" +
            " JOIN sc.course c" +
            " RIGHT JOIN sc.student s" +
            " where c.id=null")
      List<StudentCourseEntity> findStudentNotBuyAnyCourse();
-   **/
+
 }
 
