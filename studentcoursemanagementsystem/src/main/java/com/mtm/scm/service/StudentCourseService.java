@@ -32,6 +32,9 @@ public class StudentCourseService {
 
 
     public StudentCourseResponse buyCourseByStudent(BuyCourseRequest buyCourseRequest) {
+
+        log.debug("<<<<<<<<< buyCourseByStudent()");
+
         checkBuyRequest(buyCourseRequest);
 
         StudentEntity studentEntity = this.studentService.fetchStudentEntityById(buyCourseRequest.getStudentId());
@@ -40,6 +43,8 @@ public class StudentCourseService {
         studentCourseEntity.setCourse(courseEntityById);
         studentCourseEntity.setStudent(studentEntity);
         StudentCourseEntity savedEntity = this.studentCourseRepository.save(studentCourseEntity);
+
+        log.debug("buyCourseByStudent() >>>>>>>");
       return  this.studentCourseMapper.studentAndCoursetoStudentCourseResponse(savedEntity.getStudent(),savedEntity.getCourse(),savedEntity.getEnrolledDateTime());
     }
 

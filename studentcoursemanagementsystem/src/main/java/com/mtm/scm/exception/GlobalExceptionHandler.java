@@ -18,12 +18,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CustomException.class)
     public ApiResponse<Object> handleCustomException(CustomException ex) {
         String message = ex.getMessage();
-        return ApiResponse.builder().errors(Arrays.asList(message)).statusCode(HttpStatus.BAD_REQUEST.value()).build();
+        return ApiResponse.builder().errors(Arrays.asList(message)).statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value()).build();
 
     }
 
     @ExceptionHandler(RecordNotFoundException.class)
-    public ApiResponse<Object> handleCustomException(RecordNotFoundException ex) {
+    public ApiResponse<Object> handleRecordNotFoundException(RecordNotFoundException ex) {
         String message = ex.getMessage();
         return ApiResponse.builder().errors(Arrays.asList(message)).statusCode(HttpStatus.NOT_FOUND.value()).build();
     }

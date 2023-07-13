@@ -38,6 +38,7 @@ public class StudentController {
     public ApiResponse<StudentResponse> getStudentById(@PathVariable("id")  @Positive(message= "id should be greater than zero") @NotNull(message="id should not be null or empty") Integer id){
         log.debug("<<<<<<<<< getStudentById()");
         StudentResponse studentResponse = this.studentService.fetchStudentById(id);
+        log.debug("studentResponse id :: {}",studentResponse.getId());
         log.debug("getStudentById() >>>>>>>");
         ApiResponse.ApiResponseBuilder<StudentResponse> builder = ApiResponse.builder();
         return  builder.Data(studentResponse).statusCode(HttpStatus.OK.value()).build();
@@ -58,6 +59,6 @@ public class StudentController {
         PagedStudentResponse pagedStudentResponse = this.studentService.pageStudentList(pageStudentListRequest);
         ApiResponse.ApiResponseBuilder<PagedStudentResponse> builder = ApiResponse.builder();
         log.debug("getStudentList() >>>>>>>");
-        return  builder.Data(pagedStudentResponse).statusCode(HttpStatus.OK.value()).build();
-    }
+                                                                                                                                                                                                                                                                                                return  builder.Data(pagedStudentResponse).statusCode(HttpStatus.OK.value()).build();
+                                                                                                                                                                                                                                                                                            }
 }

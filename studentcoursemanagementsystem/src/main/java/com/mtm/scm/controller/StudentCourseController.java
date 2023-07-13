@@ -6,6 +6,7 @@ import com.mtm.scm.service.StudentCourseService;
 import com.mtm.scm.dto.response.ApiResponse;
 import com.mtm.scm.dto.response.StudentCourseResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ import java.util.List;
 @RequestMapping("/StudentCourse/api")
 @RequiredArgsConstructor
 @Validated
-
+@Slf4j
 public class StudentCourseController {
 
     private final StudentCourseService studentCourseService;
@@ -43,9 +44,9 @@ public class StudentCourseController {
         }
 
 
-        @GetMapping("/sc")
-        public String getStudentWhoHasNoCourse(){
-               this.studentCourseService.getStudentWhoHasNoCourse();
-               return "ok";
-        }
+//        @GetMapping("/sc")
+//        public String getStudentWhoHasNoCourse(){
+//               this.studentCourseService.getStudentWhoHasNoCourse();
+//               return "ok";
+//        }
 }
