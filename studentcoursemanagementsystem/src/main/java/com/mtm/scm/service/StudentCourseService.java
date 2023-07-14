@@ -1,5 +1,6 @@
 package com.mtm.scm.service;
 
+import com.mtm.scm.dto.response.StudentDtoUse;
 import com.mtm.scm.repository.StudentCourseRepository;
 import com.mtm.scm.dto.StudentCourseDto;
 import com.mtm.scm.dto.request.BuyCourseRequest;
@@ -59,10 +60,11 @@ public class StudentCourseService {
     }
 
     @Transactional
-    public void getStudentWhoHasNoCourse(){
+    public List<StudentDtoUse> getStudentWhoHasNoCourse(){
         log.debug("start");
-        List<StudentCourseEntity> studentNotBuyAnyCourse = this.studentCourseRepository.findStudentNotBuyAnyCourse();
+        List<StudentDtoUse> studentNotBuyAnyCourse = this.studentCourseRepository.findStudentNotBuyAnyCourse();
         log.debug("studentcourse :: {}",studentNotBuyAnyCourse);
+        return studentNotBuyAnyCourse;
     }
 
 

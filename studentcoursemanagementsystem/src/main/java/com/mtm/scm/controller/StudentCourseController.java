@@ -2,6 +2,7 @@ package com.mtm.scm.controller;
 
 import com.mtm.scm.dto.StudentCourseDto;
 import com.mtm.scm.dto.request.BuyCourseRequest;
+import com.mtm.scm.dto.response.StudentDtoUse;
 import com.mtm.scm.service.StudentCourseService;
 import com.mtm.scm.dto.response.ApiResponse;
 import com.mtm.scm.dto.response.StudentCourseResponse;
@@ -44,9 +45,10 @@ public class StudentCourseController {
         }
 
 
-//        @GetMapping("/sc")
-//        public String getStudentWhoHasNoCourse(){
-//               this.studentCourseService.getStudentWhoHasNoCourse();
-//               return "ok";
-//        }
+      @GetMapping("/sc")
+       public ApiResponse<List<StudentDtoUse>> getStudentWhoHasNoCourse(){
+              List<StudentDtoUse> studentDtoUses=this.studentCourseService.getStudentWhoHasNoCourse();
+              ApiResponse.ApiResponseBuilder<List<StudentDtoUse>> builder = ApiResponse.builder();
+              return builder.Data(studentDtoUses).statusCode(HttpStatus.OK.value()).build();
+       }
 }

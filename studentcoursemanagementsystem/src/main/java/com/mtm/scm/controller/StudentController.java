@@ -59,6 +59,6 @@ public class StudentController {
         PagedStudentResponse pagedStudentResponse = this.studentService.pageStudentList(pageStudentListRequest);
         ApiResponse.ApiResponseBuilder<PagedStudentResponse> builder = ApiResponse.builder();
         log.debug("getStudentList() >>>>>>>");
-                                                                                                                                                                                                                                                                                                return  builder.Data(pagedStudentResponse).statusCode(HttpStatus.OK.value()).build();
+      return builder.Data(pagedStudentResponse).statusCode(HttpStatus.CREATED.value()).build();
                                                                                                                                                                                                                                                                                             }
 }
