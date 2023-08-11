@@ -11,4 +11,9 @@ public class ProductmanagmentsystemApplication {
 		System.out.println("rushikesh");
 	}
 
+	public static  String getName(){
+
+		return "rushi"+"abhi"+1;
+	}
+
 }

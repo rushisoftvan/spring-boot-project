@@ -17,7 +17,7 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+//@RequestMapping("/api")
 @RequiredArgsConstructor
 @Validated
 @Slf4j
@@ -66,5 +66,10 @@ public class ProductRestController {
         log.debug("updateProduct()>>>>>>>> ");
         return new ApiResponse(productResponse, HttpStatus.OK.value());
     }
+
+    @GetMapping("/name")
+     public String getName(){
+        return "rushikesh";
+     }
 
 }
